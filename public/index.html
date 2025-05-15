@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot com GemiDIO</title>
+    <link rel="stylesheet" href="/style.css">
+    <!-- Adicione um favicon.ico na pasta 'public' se desejar -->
+    <!-- <link rel="icon" href="/favicon.ico" type="image/x-icon"> -->
+</head>
+<body>
+    <div class="chat-wrapper">
+        <h1>Chatbot com GemiDIO</h1>
+        <div id="chat-container">
+            <!-- As mensagens do chat aparecerão aqui -->
+            <div class="message bot-message">Hmpf, o que faz em meus aposentos?</div>
+        </div>
+        <div id="input-area">
+            <input type="text" id="message-input" placeholder="Digite sua mensagem aqui...">
+            <button id="send-button">Enviar</button>
+            <button id="reset-button" title="Limpar histórico da conversa">Resetar Chat</button>
+        </div>
+        <div id="status-area" class="status">Aguardando suas ordens patéticas...</div>
+    </div>
+
+    <script src="/client.js"></script>
+</body>
+</html>

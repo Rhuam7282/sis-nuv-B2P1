@@ -1,0 +1,255 @@
+/* Estilização Dio Brando - Phantom Blood */
+
+body {
+    /* Fonte mais séria/clássica, remetendo à era vitoriana */
+    font-family: 'Georgia', serif;
+    margin: 0;
+    padding: 0;
+    /* Fundo gradiente escuro e imponente (roxo para preto) */
+    background: linear-gradient(135deg, #4a0e4e, #1a001a, black);
+    color: #f0e6f0; /* Cor de texto padrão clara para contraste */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.chat-wrapper {
+    /* Fundo escuro, quase preto, para o container principal */
+    background-color: #1c1c1c;
+    /* SEM border-radius */
+    border-radius: 0;
+    /* Borda preta grossa e definida */
+    border: 4px solid black;
+    /* Sombra dura amarela, estilo JoJo, deslocada */
+    box-shadow: 6px 6px 0px 0px #f0d000;
+    width: 90%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    height: 85vh; /* Um pouco mais alto talvez */
+}
+
+h1 {
+    text-align: center;
+    padding: 12px 15px;
+    margin: 0;
+    /* Amarelo Dio para o título */
+    background-color: #f0d000;
+    /* Texto preto para máximo contraste */
+    color: black;
+    font-size: 1.4em; /* Um pouco maior e mais imponente */
+    font-weight: bold;
+    /* Letras maiúsculas e espaçamento para drama */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    /* Borda inferior preta separando do chat */
+    border-bottom: 4px solid black;
+    /* SEM border-radius */
+    border-radius: 0;
+}
+
+#chat-container {
+    flex-grow: 1;
+    padding: 15px;
+    overflow-y: auto;
+    /* Fundo do chat um pouco mais claro que o wrapper, mas ainda escuro */
+    background-color: #2a2a2a;
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Espaço entre mensagens */
+    border-bottom: 4px solid black; /* Separador antes da área de input */
+}
+
+/* Scrollbar (Opcional, mas adiciona ao tema) - Webkit browsers */
+#chat-container::-webkit-scrollbar {
+    width: 12px;
+}
+
+#chat-container::-webkit-scrollbar-track {
+    background: #2a2a2a;
+    border-left: 1px solid black;
+}
+
+#chat-container::-webkit-scrollbar-thumb {
+    background-color: #f0d000; /* Amarelo */
+    border: 2px solid black; /* Borda preta */
+}
+/* Scrollbar - Firefox */
+#chat-container {
+  scrollbar-width: thin;
+  scrollbar-color: #f0d000 #2a2a2a; /* Thumb e Track */
+}
+
+
+.message {
+    max-width: 85%; /* Mensagens podem ser um pouco mais largas */
+    padding: 10px 15px;
+    margin-bottom: 0; /* Usa o 'gap' do container */
+    /* SEM border-radius */
+    border-radius: 0;
+    line-height: 1.5;
+    word-wrap: break-word; /* Garante que palavras longas quebrem */
+    white-space: pre-wrap; /* Preserva espaços em branco e quebras de linha do texto */
+    /* Borda preta definida para todas as mensagens */
+    border: 2px solid black;
+    /* Sombra interna sutil para dar profundidade (opcional) */
+    /* box-shadow: inset 0 0 5px rgba(0,0,0,0.4); */
+}
+
+.user-message {
+    /* Cinza escuro para mensagens do usuário (menos importante) */
+    background-color: #4d4d4d;
+    color: #cccccc; /* Texto cinza claro */
+    align-self: flex-end;
+    /* Borda ligeiramente diferente para diferenciar? Ou manter preta? Manter preta. */
+}
+
+.bot-message {
+    /* Roxo Dio para as respostas do bot */
+    background-color: #6a0dad; /* Roxo vibrante */
+    /* Texto Amarelo Dio */
+    color: #f0d000;
+    font-weight: bold; /* Respostas de Dio são importantes! */
+    align-self: flex-start;
+    /* Borda amarela destacando a fala de Dio */
+    border: 2px solid #f0d000;
+    /* Efeito de "poder", uma sombra roxa mais escura */
+    box-shadow: 3px 3px 5px rgba(74, 14, 78, 0.7);
+}
+
+.error-message {
+    /* Vermelho sangue escuro para erros */
+    background-color: #8b0000;
+    color: #ffdddd; /* Texto rosa pálido */
+    align-self: stretch; /* Ocupa toda a largura */
+    text-align: center;
+    font-weight: bold;
+    border: 2px solid black;
+    padding: 12px;
+}
+
+#input-area {
+    display: flex;
+    padding: 15px;
+    /* Mesmo fundo do wrapper */
+    background-color: #1c1c1c;
+    gap: 10px; /* Espaço entre input e botões */
+}
+
+#message-input {
+    flex-grow: 1;
+    padding: 10px 15px;
+    /* Borda amarela forte */
+    border: 3px solid #f0d000;
+    /* SEM border-radius */
+    border-radius: 0;
+    font-size: 1em;
+    /* Fundo escuro */
+    background-color: #333;
+    /* Texto claro */
+    color: #eee;
+    font-family: 'Georgia', serif; /* Garantir a fonte */
+}
+
+#message-input::placeholder {
+    color: #888;
+    font-style: italic;
+}
+
+#send-button, #reset-button {
+    padding: 10px 20px;
+    border: 3px solid black; /* Borda preta grossa */
+    /* SEM border-radius */
+    border-radius: 0;
+    color: black; /* Texto preto nos botões */
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: transform 0.1s ease, background-color 0.2s ease;
+    font-family: 'Georgia', serif;
+    text-transform: uppercase; /* Botões importantes */
+}
+
+#send-button {
+    /* Botão de enviar com o Roxo Dio */
+    background-color: #8a2be2; /* Um roxo um pouco mais claro para o botão */
+    color: #f0d000; /* Texto amarelo */
+}
+
+#reset-button {
+    /* Botão de reset com o Amarelo Dio */
+    background-color: #f0d000;
+    color: black; /* Texto preto */
+}
+
+#send-button:hover {
+    background-color: #9932cc; /* Roxo mais escuro no hover */
+    transform: translateY(-2px); /* Leve levantada */
+}
+#reset-button:hover {
+    background-color: #ffd700; /* Amarelo mais brilhante no hover */
+     transform: translateY(-2px); /* Leve levantada */
+}
+
+
+#send-button:disabled, #reset-button:disabled {
+    background-color: #555; /* Cinza escuro quando desabilitado */
+    border-color: #444;
+    color: #888;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.status {
+    padding: 8px 15px;
+    font-size: 0.9em;
+    color: #f0d000; /* Amarelo Dio para status padrão */
+    text-align: center;
+    min-height: 1.2em; /* Para evitar saltos de layout */
+    background-color: #1c1c1c; /* Mesmo fundo do wrapper/input area */
+    border-top: 1px dashed #555; /* Linha pontilhada separadora */
+    line-height: 1.3; /* Para melhor leitura do status */
+}
+
+/* Indicador de "digitando" */
+.typing-indicator {
+    /* Herda o estilo .bot-message, mas remove sombra/borda específica se necessário */
+    box-shadow: none;
+    border: 2px solid #f0d000; /* Borda amarela */
+    padding: 12px 15px; /* Ajustar padding para os pontos */
+    background-color: #6a0dad; /* Mantém o fundo roxo do bot */
+}
+
+.typing-indicator span {
+    display: inline-block;
+    width: 10px; /* Pontos maiores */
+    height: 10px;
+    margin: 0 3px;
+    /* Pontos amarelos */
+    background-color: #f0d000;
+    /* SEM border-radius (pontos quadrados?) ou manter redondo? Redondo é mais padrão */
+    border-radius: 50%;
+    border: 1px solid black; /* Borda preta nos pontos */
+    animation: typing 1.2s infinite ease-in-out;
+}
+
+.typing-indicator span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typing {
+    0%, 100% {
+        opacity: 0.4;
+        transform: translateY(0);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(-4px);
+    }
+}
