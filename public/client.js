@@ -161,6 +161,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     resetButton.addEventListener('click', resetChatHistory);
     
+    // Adiciona a mensagem inicial do bot ao histórico visual, mas não ao 'chatHistory' lógico.
+    // Isso é feito para que o reset limpe corretamente e o histórico lógico comece vazio.
+    // addMessage("Hmpf, o que faz em meus aposentos?", 'bot'); // Esta linha é desnecessária pois a mensagem já está no HTML.
+
     messageInput.focus();
     scrollToBottom(); 
 
