@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const resetButton = document.getElementById('reset-button');
     const statusArea = document.getElementById('status-area');
 
+    // URL do seu backend magnífico no Render
+    const backendUrl = 'https://sis-nuv-b2p1-b.onrender.com';
+
     // O histórico começa VAZIO. A primeira mensagem do usuário será a primeira entrada.
     // A mensagem inicial do bot no HTML é apenas para exibição inicial.
     let chatHistory = [];
@@ -29,11 +32,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function showTypingIndicator() {
-        hideTypingIndicator(); 
+        hideTypingIndicator();
         const typingDiv = document.createElement('div');
         typingDiv.classList.add('message', 'bot-message', 'typing-indicator');
-        typingDiv.innerHTML = '<span></span><span></span><span></span>'; 
-        typingDiv.id = 'typing-indicator'; 
+        typingDiv.innerHTML = '<span></span><span></span><span></span>';
+        typingDiv.id = 'typing-indicator';
         chatContainer.appendChild(typingDiv);
         scrollToBottom();
     }
@@ -61,38 +64,38 @@ document.addEventListener('DOMContentLoaded', () => {
     function disableInput(disabled = true) {
         messageInput.disabled = disabled;
         sendButton.disabled = disabled;
-        resetButton.disabled = disabled; 
+        resetButton.disabled = disabled;
     }
 
     // --- Lógica Principal ---
 
     async function sendMessage() {
         const messageText = messageInput.value.trim();
-        if (!messageText) return; 
+        if (!messageText) return;
 
         addMessage(messageText, 'user');
-        
-        messageInput.value = ''; 
-        disableInput(true); 
-        showTypingIndicator(); 
+
+        messageInput.value = '';
+        disableInput(true);
+        showTypingIndicator();
         setStatus('DIO está... considerando sua patética mensagem...');
 
         try {
-            const response = await fetch('/chat', {
+            const response = await fetch(`${backendUrl}/chat`, { // ATUALIZADO AQUI
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ message: messageText, history: chatHistory }), 
+                body: JSON.stringify({ message: messageText, history: chatHistory }),
             });
 
-            hideTypingIndicator(); 
+            hideTypingIndicator();
 
             if (!response.ok) {
                 let errorMsg = `Falha ao comunicar com meu magnífico servidor (${response.status} ${response.statusText})`;
                 try {
                     const errorData = await response.json();
-                    errorMsg = errorData.error || errorData.message || errorMsg; 
+                    errorMsg = errorData.error || errorData.message || errorMsg;
                 } catch (jsonError) {
                     console.error("Não foi possível parsear JSON de erro:", jsonError);
                 }
@@ -102,17 +105,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
 
             addMessage(data.response, 'bot');
-            chatHistory = data.history; 
+            chatHistory = data.history;
             clearStatus();
 
         } catch (error) {
             console.error('Erro ao enviar/receber mensagem:', error);
-            hideTypingIndicator(); 
+            hideTypingIndicator();
             addErrorMessage(error.message || 'Minha conexão com este mundo inferior falhou. Tente novamente, se ousar.');
             setStatus('WRYYYYY! Erro!', true);
         } finally {
-             disableInput(false); 
-             messageInput.focus(); 
+             disableInput(false);
+             messageInput.focus();
         }
     }
 
@@ -125,19 +128,19 @@ document.addEventListener('DOMContentLoaded', () => {
         setStatus('Obliterando o passado... MUDA MUDA MUDA!');
 
         try {
-            const backendResponse = await fetch('/reset', { method: 'POST' });
+            const backendResponse = await fetch(`${backendUrl}/reset`, { method: 'POST' }); // ATUALIZADO AQUI
 
             if (!backendResponse.ok) {
                  throw new Error(`Meu servidor se recusa a esquecer (${backendResponse.status} ${backendResponse.statusText})`);
             }
 
-            const data = await backendResponse.json(); 
-            
-            chatContainer.innerHTML = ''; 
-            addMessage(data.message, 'bot'); 
-            
-            chatHistory = []; 
-            
+            const data = await backendResponse.json();
+
+            chatContainer.innerHTML = '';
+            addMessage(data.message, 'bot');
+
+            chatHistory = [];
+
             setStatus("Passado pulverizado. Não me aborreça à toa.");
             console.log("Histórico resetado pelo cliente.");
 
@@ -148,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } finally {
              disableInput(false);
              messageInput.focus();
-             setTimeout(clearStatus, 4000); 
+             setTimeout(clearStatus, 4000);
         }
     }
 
@@ -160,12 +163,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     resetButton.addEventListener('click', resetChatHistory);
-    
-    // Adiciona a mensagem inicial do bot ao histórico visual, mas não ao 'chatHistory' lógico.
-    // Isso é feito para que o reset limpe corretamente e o histórico lógico comece vazio.
-    // addMessage("Hmpf, o que faz em meus aposentos?", 'bot'); // Esta linha é desnecessária pois a mensagem já está no HTML.
 
     messageInput.focus();
-    scrollToBottom(); 
+    scrollToBottom();
 
 });
